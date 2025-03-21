@@ -284,7 +284,7 @@ mean_outcome_tbl %>%
   geom_point(alpha = 0.5) +
   geom_line(alpha = 0.5) +
   xlab("Sample Size") +
-  ylab("Relative Accuracy (100 Replicates)") +
+  ylab("Rule Quality (100 Replicates)") +
   scale_shape_discrete(
     name = "TEM-VIP-Based Filtering", labels = unihtee_filtering_labeller
   ) +
@@ -323,7 +323,7 @@ summary_rel_accuracy_plot <- mean_outcome_tbl %>%
   geom_point(alpha = 0.5, size = point_size) +
   geom_line(alpha = 0.5) +
   xlab("Sample Size") +
-  ylab("Relative Accuracy") +
+  ylab("Rule Quality") +
   scale_shape_discrete(
     name = "TEM-VIP-Based Filtering", labels = unihtee_filtering_labeller
   ) +

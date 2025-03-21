@@ -142,19 +142,19 @@ results_tbl <- mean_outcome_tbl %>%
     dgp = dgp_labeller(.dgp_name),
     method = method_labeller(.method_name),
     method = factor(method, level = method_order),
-    "Relative accuracy" = format(round(rel_mean_itr, 2), nsmall = 2),
+    "Relative rule quality" = format(round(rel_mean_itr, 2), nsmall = 2),
     "Mean fit time (sec.)" = format(round(mean_fit_time, 2), nsmall = 2),
     "Empirical FDR (%)" = format(round(fdr * 100, 2), nsmall = 2),
     "Empirical TPR (%)" = format(round(tpr * 100, 2), nsmall = 2),
     "Empirical TNR (%)" = format(round(tnr * 100, 2), nsmall = 2)
   ) %>% 
   select(
-    dgp, type, method, n, unihtee_filtering, `Relative accuracy`,
+    dgp, type, method, n, unihtee_filtering, `Relative rule quality`,
     `Mean fit time (sec.)`, `Empirical FDR (%)`, `Empirical TPR (%)`,
     `Empirical TNR (%)`
   ) %>%
   pivot_longer(
-    cols = c(`Relative accuracy`, `Mean fit time (sec.)`, `Empirical FDR (%)`,
+    cols = c(`Relative rule quality`, `Mean fit time (sec.)`, `Empirical FDR (%)`,
              `Empirical TPR (%)`, `Empirical TNR (%)`),
     names_to = "metric"
   ) %>% 
@@ -166,7 +166,7 @@ results_tbl <- mean_outcome_tbl %>%
   mutate(
     metric = factor(
       metric,
-      levels = c("Relative accuracy", "Empirical FDR (%)", "Empirical TPR (%)",
+      levels = c("Relative rule quality", "Empirical FDR (%)", "Empirical TPR (%)",
                  "Empirical TNR (%)", "Mean fit time (sec.)")
     )
   ) %>% 
@@ -199,7 +199,7 @@ extract_latex_table_fun <- function(results_tbl, dgp_name, type_name) {
       suffix = c("", " ")
     ) %>%
     select(-dgp) %>% 
-    mutate(method = if_else(metric == "Relative accuracy", method, "")) %>% 
+    mutate(method = if_else(metric == "Relative rule quality", method, "")) %>% 
     rename(`CATE Estimator` = method, Metric = metric)
   
   dgp_xtable <- xtable(
